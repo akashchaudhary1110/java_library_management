@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="PHRLoginHeader :: head"></th:block>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="No-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="phrnew.css">
+    <title>PHR Login</title>
+    <script type="text/javascript">
+        function disableButton() {
+            document.getElementById("loginBtn").disabled = true;
+            var loadingElement = document.getElementById("divLoading");
+            loadingElement.style.display = "block";
+            return true;
+        }
+        function isItIE() {
+            var user_agent = navigator.userAgent;
+            return user_agent.indexOf("MSIE ") > -1 || user_agent.indexOf("Trident/") > -1;
+        }
+        if (isItIE()) {
+            console.log('It is Internet Explorer');
+            alert('WARNING: you are using Internet Explorer which is no longer supported and this application may not work properly. Please switch to Edge, Chrome, Firefox, or Safari.');
+        }
+    </script>
+</head>
+
+<body class="login">
+    <div th:fragment="header" class="login-header-container">
+        <div class="container-fluid " style="margin-bottom: 20px;" id="innerPageHeader">
+            <div id="login-header" title="Indian Health Service Personal Health Record"
+                alt="Indian Health Service Personal Health Record">
+                <div style="display:flex;margin-top:15px;">
+                    <!-- <img style="align-self:center;" height="65" width="65" alt="IHS logo"
+                        th:src="@{/img/ihs-black-logo.png}"
+                        > -->
+
+                        <img style="align-self:center;" height="65" width="65" alt="IHS logo" src="logo.png">  
+                    <div style="align-self:center;padding:0px 10px;">
+                        <h3 style="margin:0" class="header_main_text"><strong>Indian Health Service</strong></h3>
+                        <h2 style="margin:-5px 0 0 0; line-height:20px;">
+                            <small class="header_main_text">Personal Health Record</small>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="border-bottom:solid 5px #007bff; width:100%;"></div>
+    </div>
+
+    <div th:replace="PHRLoginHeader :: body"></div>
+       <!-- Main Content -->
+       <div class="container-fluid px-3 mx-auto full-page login-page-main-container" >
+        <!-- Top Section - Login Form and Alert Box -->
+        <div class="top-section">
+            <!-- Login Form -->
+            <div class="alert-box accordion-section">
+                <h4 style="margin-top: 0; color: var(--ihs-blue);">Important Notice</h4>
+                <p>
+                    The PHR Medication Refill Request Service is now available for
+                    participating facilities. If the medication Request Refill button
+                    is not available for medications at your facility, please continue
+                    to utilize alternate methods for requesting medication refills
+                    while we continue to onboard additional facilities.
+                </p>
+            </div>
+            <div class="login-top-section-firstdiv">
+              
+                   
+                
+                <div class="login-box">
+                    <div class="login-form-heading">
+                        <h3><strong>PHR Login</strong></h3>
+                    </div>
+                    <p><strong>* Indicates Required Field.</strong></p>
+                    <form th:action="@{PHRLogin}" th:method="POST" th:object="${xuser}" autocomplete="off">
+                        <div class="form-group">
+                            <label for="username">Username*</label>
+                            <input type="text" id="username" placeholder="Username" required class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password*</label>
+                            <input type="password" id="password" placeholder="Password" required class="form-control" />
+                        </div>
+                        <button type="submit" class="btn btn-block">Login</button>
+                        <a href="#" class="forgot-link">Forgot Username or Password?</a>
+                    </form>
+                    <div class="cf-turnstile text-center"
+                         data-sitekey="0x4AAAAAABIjo_POFjuHygzH"
+                         data-action="login"
+                         data-language="auto"
+                         data-size="compact">
+                    </div>
+                    <div class="text-center " style="margin-top: 10px;">
+                        <button class="btn btn-block">Register to use PHR</button>
+                    </div>
+                </div>
+               
+            </div>
+            
+            <!-- Alert Box -->
+            <div class="login-top-section-seconddiv">
+                <div>
+                    <div class="banner-container">
+                      <div class="banner">
+                       
+          
+                        <!-- <img th:src="@{/img/hero_image.png}" alt="PHR Banner">  -->
+                        <img src="IHS banner.png" alt="PHR Banner" />
+                      </div>
+                    </div>
+                  </div>
+
+                <div class="alert-box hero-section">
+                    <h4 style="margin-top: 0; color: var(--ihs-blue);">Important Notice</h4>
+                    <p>
+                        The PHR Medication Refill Request Service is now available for
+                        participating facilities. If the medication Request Refill button
+                        is not available for medications at your facility, please continue
+                        to utilize alternate methods for requesting medication refills
+                        while we continue to onboard additional facilities.
+                    </p>
+                </div>
+                <!-- <div class="gap"></div> -->
+            </div>
+        </div>
+        
+        <!-- Divider -->
+        <!-- <div class="section-divider"></div> -->
+        
+        <!-- Cards Section -->
+        <div class="cards-section">
+            <div class="grid-container">
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fa fa-question-circle fa-3x"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h4><strong>What is the Personal Health Record?</strong></h4>
+                        <p>
+                            The Indian Health Service Personal Health Record (PHR) can
+                            help you access your health information. You can track
+                            medications and lab results, contact your health care
+                            provider, and much more.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fa fa-user fa-3x"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h4><strong>Who can use the Personal Health Record?</strong></h4>
+                        <p>
+                            Any patient within the Indian Health System can register to
+                            use the PHR. As part of the registration process, patients
+                            must verify their identity.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-icon">
+                        <i class="fa fa-clock-o fa-3x"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h4><strong>When should I use the Personal Health Record?</strong></h4>
+                        <p>
+                            The PHR is a tool that provides you with timely access to your
+                            health information. If you are experiencing a medical
+                            emergency, call 911 or visit the ER.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-icon" style="color: rgb(145, 41, 41);">
+                        <i class="fa fa-wrench fa-3x"></i>
+                    </div>
+                    <div class="grid-content">
+                        <h4 class="Maintenance-heading" style="color: rgb(145, 41, 41);"><strong>PHR Maintenance</strong></h4>
+                        <p>
+                            The PHR is updated on Thursdays between 10 pm and 11 pm
+                            Eastern Time. You may not be able to log in during this time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-section">
+        
+              <div class="panel-group" id="accordion">
+          
+                  <div class="panel panel-card">
+                      <div class="panel-heading card-header">
+                          <h4 class="panel-title">
+                              <div class="accordion-toggle">
+                                
+                                <i class="fa fa-question-circle fa-3x"></i>
+                                
+                                <div class="accordion-text">
+  
+                                  What is the Personal Health Record?
+                                </div>
+                                <div class="down-arrow">
+  
+                                  <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                </div>
+                              </div>
+                          </h4>
+                      </div>
+                      <div class="panel-body card-body">
+                          The Indian Health Service Personal Health Record (PHR) helps you access your health information.
+                          You can track medications, lab results, and contact your healthcare provider.
+                      </div>
+                  </div>
+          
+                  <div class="panel panel-card">
+                      <div class="panel-heading card-header">
+                          <h4 class="panel-title">
+                              <div class="accordion-toggle">
+                                <i class="fa fa-user fa-3x"></i>
+                                  <div class="accordion-text">
+  
+                                    Who can use the Personal Health Record?
+                                  </div>
+                                  <div class="down-arrow">
+  
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                  </div>
+                              </div>
+                          </h4>
+                      </div>
+                      <div class="panel-body card-body">
+                          Any patient within the Indian Health System can register to use the PHR.
+                          As part of the registration process, patients must verify their identity.
+                      </div>
+                  </div>
+          
+                  <div class="panel panel-card">
+                      <div class="panel-heading card-header">
+                          <h4 class="panel-title">
+                              <div class="accordion-toggle">
+                                <i class="fa fa-clock-o fa-3x"></i>
+                                  <div class="accordion-text">
+  
+                                    When should I use the Personal Health Record?
+                                  </div>
+                                  <div class="down-arrow">
+  
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                  </div>
+                              </div>
+                          </h4>
+                      </div>
+                      <div class="panel-body card-body">
+                          The PHR provides timely access to your health information.
+                          If you are experiencing a medical emergency, call 911.
+                      </div>
+                  </div>
+          
+                  <div class="panel panel-card">
+                      <div class="panel-heading card-header">
+                          <h4 class="panel-title" style="background-color:#f2efef;">
+                              <div class="accordion-toggle Maintenance-heading">
+                                <i class="fa fa-wrench fa-3x"></i>
+                                  <div class="accordion-text">
+  
+                                    PHR Maintenance
+                                  </div>
+                                  <div>
+  
+                                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                                  </div>
+                              </div>
+                          </h4>
+                      </div>
+                      <div class="panel-body card-body">
+                          The PHR is updated on Thursdays between 10 pm and 11 pm Eastern Time.
+                      </div>
+                  </div>
+          
+              </div>
+         
+          
+          </div>
+    </div>
+
+
+    <!--                <div th:if="${#httpServletRequest.getAttribute('showNotificationMessage')}" >
+                    <div class="alert-container">
+                        <div class="alert-box">
+                            <p th:utext="${#httpServletRequest.getAttribute('showNotificationMessage')}"></p>
+                        </div>
+                    </div>
+                </div>-->
+
+    <!-- <div th:if="${T(gov.ihs.phr.util.FileUtils).getPHRProps().getProperty('showNotificationMessage')}">
+                <div class="alert-container">
+                        <div class="alert-box">
+                            <p th:utext="${T(gov.ihs.phr.util.FileUtils).getPHRProps().getProperty('showNotificationMessage')}"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+                 <div th:if="${#httpServletRequest.getAttribute(T(gov.ihs.phr.util.PHRGlobals).NOT_MINOR)}">
+                    <div class="alert-container">
+                        <div class="alert-box">
+                            <p th:utext="${#httpServletRequest.getAttribute(T(gov.ihs.phr.util.PHRGlobals).NOT_MINOR)}"></p>
+                        </div>
+                    </div>
+                </div> -->
+
+    <!--
+                <div class="alert-container login-main-alert">
+                    <div class="alert-box" th:if="${#strings.isEmpty(T(gov.ihs.phr.util.PHRGlobals).NOT_MINOR) == false}" 
+                         th:text="${T(gov.ihs.phr.util.PHRGlobals).NOT_MINOR}">
+                    </div>
+                </div>-->
+
+    <!-- Adding space below alert -->
+
+
+
+
+
+
+
+
+
+
+
+    <div th:fragment="footer">
+        <!--    <div th:with="user=${session[T(gov.ihs.phr.util.PHRGlobals).PHR_USER_PRINCIPAL]},
+                     accountType=${session[T(gov.ihs.phr.util.PHRGlobals).ACCOUNT_TYPE]}">
+            
+                    <div th:if="${user != null and accountType == null}" 
+                         th:with="accountType=${T(gov.ihs.phr.util.PHRGlobals).MY_ACCOUNT}">  
+                        session.setAttribute(gov.ihs.phr.util.PHRGlobals.ACCOUNT_TYPE, accountType); setting the values in the session 
+                    </div>
+                    <p th:with="principalKey=${T(gov.ihs.phr.util.PHRGlobals).PHR_USER_PRINCIPAL}"
+                        th:text="${#session[principalKey]}">
+                    </p>-->
+
+        <footer class="footer text-center">
+            <!--<div th:text="${T(gov.ihs.phr.util.PHRGlobals).PHR_USER_PRINCIPAL}"></div> getting values from the session -->
+            <hr style="border: 1px solid lightgrey" />
+            <p>
+                <a class="text-primary" href="#"
+                    th:onclick="|window.open('@{/docs/about_phr.html}', 'info', 'left=20,top=20,width=540,height=560,toolbar=0,menubar=0,status=0,resizable=1'); return false;|">About
+                    PHR</a> |
+                <a class="text-primary"
+                    th:with="privacyLink=${T(gov.ihs.phr.util.FileUtils).getPHRProps().getProperty('privacypolicy')}"
+                    th:href="${privacyLink}" target="_blank">Privacy Policy</a> |
+                <a class="text-primary"
+                    th:with="FOIA=${T(gov.ihs.phr.util.FileUtils).getPHRProps().getProperty('FOIA')}" th:href="${FOIA}"
+                    target="_blank">Freedom of Information Act (FOIA)</a> |
+                <a class="text-primary"
+                    th:with="accessibility=${T(gov.ihs.phr.util.FileUtils).getPHRProps().getProperty('accessibility')}"
+                    th:href="${accessibility}" target="_blank">Accessibility</a> |
+                <a class="text-primary" th:href="@{/docs/Terms_and_Conditions.html}" target="_blank">Terms and
+                    Conditions</a> |
+                <a class="text-primary" href="#"
+                    th:onclick="|window.open('@{/docs/contact_us.html}', 'info', 'left=20,top=20,width=500,height=500,toolbar=0,menubar=0,status=0,resizable=0'); return false;|">Contact
+                    Us</a>
+            </p>
+            <p class="copyrighttext">&copy; 2013 Indian Health Service. All Rights Reserved.<span
+                    th:with="version=${session?.VERSION ?: 
+                                                                                                              T(gov.ihs.phr.util.FileUtils).getPHRProps().getProperty('VERSION', 'Unknown')}">
+                    <span th:text="${version}"></span>
+                    <!--<span th:if="${session != null and version != null}" th:attr="data-session-set=${#session.setAttribute('VERSION', version)}"></span>-->
+                </span> Release 1</p>
+        </footer>
+        <!--<script th:src="@{/js/jquery1.min.js}"></script>-->
+        <!-- <script th:src="@{/js/jquery-3.6.1.min.js}"></script>
+                    <script th:src="@{/js/jquery-ui-1.12.1.js}"></script>
+                    <script th:src="@{/bootstrap-3.3.5/js/bootstrap.min.js}"></script> -->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+    </div>
+
+
+
+
+
+    <!-- new changes by akash -->
+
+    <!-- <div th:replace="PHRFooter :: footer"></div> -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <script>
+        //        const togglePassword =
+        //                document.querySelector('#togglePassword');
+        //
+        //        const password = document.querySelector('#passwordid');
+        //
+        //        togglePassword.addEventListener('click', function (e) {
+        //
+        //            // Toggle the type attribute
+        //            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        //            password.setAttribute('type', type);
+        //
+        //            // Toggle the eye slash icon
+        //            if (togglePassword.src.match("./img/eyeslash.png")) {
+        //                togglePassword.src = "./img/eye.png";
+        //            } else {
+        //                togglePassword.src = "./img/eyeslash.png";
+        //            }
+        //        });
+        $(document).ready(function () {
+            $("#togglePassword-login").click(function () {
+                let passwordField = $("#password");
+                let icon = $(this);
+
+                // Toggle password field type
+                if (passwordField.attr("type") === "password") {
+                    passwordField.attr("type", "text");
+                    icon.removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+                } else {
+                    passwordField.attr("type", "password");
+                    icon.removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+        $(".accordion-toggle").click(function () {
+            let panelBody = $(this).closest(".panel").find(".panel-body");
+
+            // Close all other panels
+            $(".panel-body").not(panelBody).slideUp();
+            $(".accordion-toggle").not(this).removeClass("active");
+            $(".glyphicon-chevron-down").not($(this).find(".glyphicon-chevron-down")).removeClass("rotate");
+
+            // Toggle the clicked panel
+            if (panelBody.is(":visible")) {
+                panelBody.slideUp();
+                $(this).removeClass("active");
+            } else {
+                panelBody.slideDown();
+                $(this).addClass("active");
+            }
+        });
+    });
+    </script>
+
+    <!--<script type="text/javascript" src="js/buttons.js"></script>-->
+</body>
+
+</html>
